@@ -1,0 +1,52 @@
+<form [formGroup]="facturas" (ngSubmit)="venderProducto()">
+  <div class="spinner-border text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <div>
+    <h3><span>Nombre: </span> {{producto.nombre}} </h3>
+    <ul>
+      <li><span>Stock: </span>{{producto.cantidad}}</li>
+      <li><span>Precio actual: </span>{{producto.valor | currency}}</li>
+
+    </ul>
+
+  </div>
+  <div class="form-group row">
+    <label class="control-label col md-12">Cantidad</label>
+    <div class="col-md-12">
+      <input type="number" calculo class="form-control" value=0
+        onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+        formControlName="cantidad">
+    </div>
+    <span class="text-danger ml-3"
+      *ngIf="facturas.get('cantidad').hasError('required') && facturas.get('cantidad').touched"> Este campo es
+      requerido</span>
+  </div>
+  <div class="form-group row">
+    <label class="control-label col md-12">Cédula Cliente</label>
+    <div class="col-md-12">
+      <input type="text" min="1" max="5"
+        onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control"
+        formControlName="cedula">
+    </div>
+    <span class="text-danger ml-3"
+      *ngIf="facturas.get('cedula').hasError('required') && facturas.get('cedula').touched"> Este campo es
+      requerido</span>
+  </div>
+  <div class="form-group row">
+    <label class="control-label col md-12">Precio Total</label>
+    <div class="col-md-12">
+      <input type="text" placeholder="Valor Total calculado automaticamente" readonly="readonly" class="form-control"
+        formControlName="valorTotal"
+        onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+    </div>
+    <span class="text-danger ml-3"
+      *ngIf="facturas.get('valorTotal').hasError('required') && facturas.get('valorTotal').touched"> Este campo es
+      requerido</span>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success float-right">Generar Compra</button>
+    <button [routerLink]="['/productos']" class="btn btn-secondary float-left">Cancelar</button>
+  </div>
+</form>

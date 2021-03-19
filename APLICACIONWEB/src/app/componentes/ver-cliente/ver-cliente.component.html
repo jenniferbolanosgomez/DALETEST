@@ -1,0 +1,16 @@
+<div class="spinner-border text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+  </div>
+  
+  <div>
+    <h3><span>Cédula: </span> {{cliente.cedula}} </h3>
+    <h5><span>Teléfono: </span>{{cliente.telefono}}</h5>
+  
+    <ul>
+      <li><span>Nombre: </span>{{cliente.nombre}}</li>
+      <li><span>Apellido: </span>{{cliente.apellido}}</li>
+     
+    </ul>
+  
+  </div>
+  <button [routerLink] ="['/']" class="btn btn-secondary float-left">Regresar</button>

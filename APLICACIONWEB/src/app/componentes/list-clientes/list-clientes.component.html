@@ -1,0 +1,35 @@
+<div class="row" style="padding-top:10px ;">
+    <div class="col-lg-6">
+        <h3>Listado de Clientes</h3>
+    </div>
+    <div class="col-lg-6">
+        <button class="btn btn-primary float-right" [routerLink]="['add']">Nuevo Cliente</button>
+        <button class="btn btn-warning float-right" [routerLink]="['productos']">Ver Productos</button>
+    </div>    
+</div>
+<div class="spinner-border text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
+<br>
+<table class="table table-sm table-hover">
+    <thead>
+        <th>Cédula</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Teléfono</th>
+
+
+    </thead>
+    <tbody>
+        <tr *ngFor="let Cliente of listClientes">
+            <td><a [routerLink]="['/see/', Cliente.id]"> {{Cliente.cedula}}</a></td>
+            <td>{{Cliente.nombre}}</td>
+            <td>{{Cliente.apellido}}</td>
+            <td>{{Cliente.telefono}}</td>
+            <td><button class="btn btn-primary btn-sm float-right" [routerLink]="['/edit/', Cliente.id]">Actualizar</button>
+            </td>
+            <td><button class="btn btn-danger btn-sm float-right" (click)="eliminar(Cliente.id)">Eliminar</button></td>
+        </tr>
+
+    </tbody>
+</table>

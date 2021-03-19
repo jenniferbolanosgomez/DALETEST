@@ -1,0 +1,45 @@
+<div class="row" style="padding-top:10px ;">
+    <div class="col-lg-6">
+        <h3>Listado de Productos</h3>
+    </div>
+    <div class="col-lg-6">
+        <button class="btn btn-primary float-right" [routerLink]="['/addproducto']">Nuevo Producto</button>
+        <button class="btn btn-warning float-right" [routerLink]="['/']">Ver Clientes</button>
+    </div>
+</div>
+<div class="spinner-border text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
+<br>
+<table class="table table-sm table-hover">
+    <thead>
+        <th>Venta</th>
+        <th>Nombre</th>
+        <th>Precio Unitario</th>
+        <th>Stock</th>
+
+
+    </thead>
+    <tbody>
+        <tr *ngFor="let Producto of listProductos">
+            <td><a [routerLink]="['/venderproducto/', Producto.id]">
+                    <span class="float-left">
+
+                        <button class="btn btn-success btn-sm float-right"
+                            [routerLink]="['/venderproducto/', Producto.id]">Vender
+                            Producto</button>
+                    </span>
+                </a></td>
+
+
+            <td>{{Producto.nombre}}</td>
+            <td>{{Producto.valor | currency}}</td>
+            <td>{{Producto.cantidad}}</td>
+            <td><button class="btn btn-primary btn-sm float-right"
+                    [routerLink]="['/editproducto/', Producto.id]">Actualizar</button>
+            </td>
+            <td><button class="btn btn-danger btn-sm float-right" (click)="eliminar(Producto.id)">Eliminar</button></td>
+        </tr>
+
+    </tbody>
+</table>

@@ -1,0 +1,41 @@
+<h3> {{ accion }} Producto</h3>
+<div class="spinner-border text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<form [formGroup]="productos" (ngSubmit)="almacenarProducto()">
+    <div class="form-group row">
+        <label class="control-label col md-12">Nombre</label>
+        <div class="col-md-12">
+            <input type="text" class="form-control" formControlName="nombre">
+        </div>
+        <span class="text-danger ml-3"
+            *ngIf="productos.get('nombre').hasError('required') && productos.get('nombre').touched"> Este campo es
+            requerido</span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col md-12">Precio</label>
+        <div class="col-md-12">
+            <input type="text" class="form-control" formControlName="valor"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+        </div>
+        <span class="text-danger ml-3"
+            *ngIf="productos.get('valor').hasError('required') && productos.get('valor').touched"> Este campo es
+            requerido</span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col md-12">Cantidad</label>
+        <div class="col-md-12">
+            <input type="text" min="1" max="5"
+                onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                class="form-control" formControlName="cantidad">
+        </div>
+        <span class="text-danger ml-3"
+            *ngIf="productos.get('cantidad').hasError('required') && productos.get('cantidad').touched"> Este campo es
+            requerido</span>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success float-right" [disabled]="productos.invalid">Aceptar</button>
+        <button [routerLink]="['/productos']" class="btn btn-secondary float-left">Cancelar</button>
+    </div>
+</form>

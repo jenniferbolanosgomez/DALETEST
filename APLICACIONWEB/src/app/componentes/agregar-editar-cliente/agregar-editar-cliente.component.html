@@ -1,0 +1,47 @@
+<h3> {{ accion }} Cliente</h3>
+<div class="spinner-border text-primary" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+</div>
+
+<form [formGroup]="clientes" (ngSubmit)="almacenarCliente()">
+    <div class="form-group row">
+        <label class="control-label col md-12">Cedula</label>
+        <div class="col-md-12">
+            <input type="text" min="7" max="10"  onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" formControlName="cedula">
+        </div>
+        <span class="text-danger ml-3"
+            *ngIf="clientes.get('cedula').hasError('required') && clientes.get('cedula').touched">
+            Este campo es requerido</span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col md-12">Nombre</label>
+        <div class="col-md-12">
+            <input type="text" class="form-control" formControlName="nombre">
+        </div>
+        <span class="text-danger ml-3"
+            *ngIf="clientes.get('nombre').hasError('required') && clientes.get('nombre').touched"> Este campo es
+            requerido</span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col md-12">Apellido</label>
+        <div class="col-md-12">
+            <input type="text" class="form-control" formControlName="apellido">
+        </div>
+        <span class="text-danger ml-3"
+            *ngIf="clientes.get('apellido').hasError('required') && clientes.get('apellido').touched"> Este campo es
+            requerido</span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col md-12">Telefono</label>
+        <div class="col-md-12">
+            <input type="text" min="7" max="10"  onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"  class="form-control" formControlName="telefono">
+        </div>
+        <span class="text-danger ml-3"
+            *ngIf="clientes.get('telefono').hasError('required') && clientes.get('telefono').touched"> Este campo es
+            requerido</span>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success float-right" [disabled]="clientes.invalid">Aceptar</button>
+        <button [routerLink]="['/']" class="btn btn-secondary float-left">Cancelar</button>
+    </div>
+</form>
